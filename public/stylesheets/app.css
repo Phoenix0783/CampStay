@@ -1,9 +1,542 @@
-#cluster-map {
+:root {
+    --ink: #263238;
+    --muted: #707b7d;
+    --surface: #fff;
+    --canvas: #f6f4ef;
+    --line: #e7e2d9;
+    --green: #3e6255;
+    --green-dark: #2c493f;
+    --lime: #e8c69a;
+    --shadow: 0 1rem 2.5rem rgba(48, 57, 51, 0.09);
+}
+
+html {
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    color: var(--ink);
+    background: var(--canvas);
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body.d-flex {
+    min-height: 100vh;
+}
+
+a {
+    color: #a36a43;
+}
+
+a:hover {
+    color: #3e6255;
+}
+
+.site-navbar {
+    padding: 0.65rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    background: #263331;
+    box-shadow: 0 0.2rem 0.8rem rgba(24, 34, 31, 0.12);
+}
+
+.site-navbar .navbar-brand {
+    color: #fff;
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+}
+
+.site-navbar .navbar-brand:hover {
+    color: #e8c69a;
+}
+
+.site-navbar .navbar-nav {
+    align-items: center;
+}
+
+.site-navbar .nav-link {
+    margin: 0 0.15rem;
+    padding: 0.6rem 0.7rem;
+    border-bottom: 2px solid transparent;
+    color: #c5ceca;
+    font-size: 0.92rem;
+    font-weight: 500;
+    transition: color 150ms ease, border-color 150ms ease;
+}
+
+.site-navbar .nav-link:hover,
+.site-navbar .nav-link:focus {
+    border-bottom-color: #c49a72;
+    color: #fff;
+}
+
+.site-navbar .nav-link.nav-cta {
+    margin-left: 0.6rem;
+    padding-right: 0.9rem;
+    padding-left: 0.9rem;
+    border: 1px solid #9f8062;
+    border-radius: 0.35rem;
+    color: #ead8c5;
+    font-weight: 600;
+}
+
+.site-navbar .nav-link.nav-cta:hover {
+    border-color: #d0ad89;
+    color: #fff;
+    background: rgba(196, 154, 114, 0.12);
+}
+
+.site-navbar .navbar-nav.ml-auto .nav-link:last-child {
+    color: #ead8c5;
+}
+
+main.container {
     width: 100%;
-    height: 500px;
+    max-width: 1140px;
+    flex: 1 0 auto;
+    padding-top: 2.5rem;
+    padding-bottom: 3.5rem;
+}
+
+.footer {
+    flex-shrink: 0;
+    color: rgba(255, 255, 255, 0.72);
+    background: #263b38;
+}
+
+.footer .footer-brand {
+    color: #fff;
+    font-weight: 800;
+}
+
+.footer a {
+    color: var(--lime);
+    text-decoration: none;
+}
+
+.footer a:hover {
+    color: #fff;
+}
+
+.page-heading {
+    margin-bottom: 1.5rem;
+}
+
+.campgrounds-index-heading {
+    margin-top: -3rem;
+}
+
+.page-heading h1,
+.page-heading h2 {
+    margin-bottom: 0.35rem;
+    color: var(--ink);
+    font-weight: 800;
+    letter-spacing: -0.035em;
+}
+
+.page-heading p {
+    margin-bottom: 0;
+    color: var(--muted);
+}
+
+.page-eyebrow {
+    display: inline-block;
+    margin-bottom: 0.45rem;
+    color: var(--green);
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+}
+
+.btn {
+    border-radius: 0.65rem;
+    font-weight: 700;
+    transition: transform 150ms ease, box-shadow 150ms ease, background 150ms ease;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+.btn-primary,
+.btn-success,
+.btn-info {
+    border-color: var(--green);
+    color: #fff;
+    background: var(--green);
+}
+
+.btn-primary:hover,
+.btn-success:hover,
+.btn-info:hover,
+.btn-primary:focus,
+.btn-success:focus,
+.btn-info:focus {
+    border-color: var(--green-dark);
+    color: #fff;
+    background: var(--green-dark);
+    box-shadow: 0 0.4rem 0.9rem rgba(62, 98, 85, 0.18);
+}
+
+.btn-danger {
+    background: #d94f68;
+}
+
+.form-label {
+    color: #344252;
+    font-weight: 700;
+}
+
+.form-control,
+.input-group-text {
+    min-height: 2.85rem;
+    border-color: #d6e0e9;
+    border-radius: 0.65rem;
+}
+
+.input-group > .input-group-text {
+    color: #fff;
+    background: var(--green);
+}
+
+.input-group > .form-control:not(:first-child) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.form-control:focus {
+    border-color: #829d8b;
+    box-shadow: 0 0 0 0.2rem rgba(62, 98, 85, 0.13);
+}
+
+textarea.form-control {
+    min-height: 8rem;
+}
+
+.alert {
+    border: 0;
+    border-radius: 0.85rem;
+    box-shadow: 0 0.5rem 1.5rem rgba(36, 57, 77, 0.08);
+}
+
+.alert-success {
+    color: #365847;
+    background: #e9f1e9;
+}
+
+.alert-danger {
+    color: #873f3b;
+    background: #f8eae6;
+}
+
+#cluster-map,
+#map {
+    overflow: hidden;
+    width: 100%;
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+    background: #e4edf1;
+    box-shadow: var(--shadow);
+}
+
+#cluster-map {
+    position: relative;
+    left: 50%;
+    width: calc(100vw - 2rem);
+    height: 430px;
+    margin-left: calc(-50vw + 1rem);
+    margin-bottom: 2.5rem;
+    border-radius: 1rem;
 }
 
 #map {
+    height: 330px;
+    margin-bottom: 1.5rem;
+}
+
+.campground-form-card,
+.auth-card {
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 1.25rem;
+    background: var(--surface);
+    box-shadow: var(--shadow);
+}
+
+.campground-form-card {
+    margin-bottom: 2rem;
+}
+
+.campground-form-header,
+.auth-card-header {
+    padding: 2rem 2.25rem 1.75rem;
+    color: #fff;
+    background: linear-gradient(120deg, #314b43, #4e6c59 65%, #7f9068);
+}
+
+.campground-form-kicker,
+.auth-card-header .page-eyebrow {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    color: #f0d7b7;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.campground-form-header h1,
+.auth-card-header h1 {
+    margin: 0;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+}
+
+.campground-form-header p,
+.auth-card-header p {
+    margin: 0.5rem 0 0;
+    color: rgba(255, 255, 255, 0.88);
+}
+
+.campground-form,
+.auth-card-body {
+    padding: 2rem 2.25rem;
+}
+
+.campground-form .form-label,
+.auth-card-body .form-label {
+    color: #344252;
+}
+
+.campground-form .form-file-label {
+    overflow: hidden;
+    border: 1px dashed #b6c4b5;
+    border-radius: 0.65rem;
+    color: #3e6255;
+    background: #f4f6f1;
+}
+
+.campground-form .form-file-button {
+    color: #fff;
+    background: var(--green);
+}
+
+.campground-submit,
+.auth-submit {
+    padding: 0.7rem 1.4rem;
+    border: 0;
+    border-radius: 0.65rem;
+    color: #fff;
+    background: linear-gradient(110deg, #3e6255, #567660);
+    font-weight: 700;
+    box-shadow: 0 0.4rem 1rem rgba(62, 98, 85, 0.18);
+}
+
+.campground-submit:hover,
+.campground-submit:focus,
+.auth-submit:hover,
+.auth-submit:focus {
+    color: #fff;
+    background: linear-gradient(110deg, #2c493f, #3e6255);
+    box-shadow: 0 0.6rem 1.2rem rgba(62, 98, 85, 0.25);
+}
+
+.campground-listing {
+    overflow: hidden;
+    margin-bottom: 1.25rem;
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+    background: #fff;
+    box-shadow: 0 0.55rem 1.5rem rgba(36, 57, 77, 0.07);
+    transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.campground-listing:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow);
+}
+
+.campground-listing-image {
     width: 100%;
-    height: 300px;
+    height: 100%;
+    min-height: 230px;
+    object-fit: cover;
+}
+
+.campground-listing .card-body {
+    padding: 1.5rem;
+}
+
+.campground-listing .card-title {
+    margin-bottom: 0.6rem;
+    color: var(--ink);
+    font-size: 1.35rem;
+    font-weight: 800;
+}
+
+.campground-listing .card-text {
+    color: var(--muted);
+}
+
+.campground-location {
+    color: var(--green) !important;
+    font-weight: 700;
+}
+
+.empty-state {
+    padding: 3rem 1.5rem;
+    border: 1px dashed #b9c9d1;
+    border-radius: 1rem;
+    color: var(--muted);
+    background: #fff;
+    text-align: center;
+}
+
+.campground-carousel {
+    overflow: hidden;
+    margin-bottom: 1.25rem;
+    border-radius: 1rem;
+    background: #e6edf0;
+    box-shadow: var(--shadow);
+}
+
+.campground-carousel .carousel-item img {
+    width: 100%;
+    height: 430px;
+    object-fit: cover;
+}
+
+.detail-card,
+.review-card {
+    overflow: hidden;
+    margin-bottom: 1.25rem;
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+    background: #fff;
+    box-shadow: 0 0.55rem 1.5rem rgba(36, 57, 77, 0.07);
+}
+
+.detail-card .card-body,
+.review-card .card-body {
+    padding: 1.5rem;
+}
+
+.detail-card .card-title {
+    color: var(--ink);
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+.detail-card .card-text,
+.review-card .card-text {
+    color: #586677;
+    line-height: 1.7;
+}
+
+.detail-card .list-group-item {
+    padding: 0.9rem 1.5rem;
+    border-color: var(--line);
+    color: #475565;
+}
+
+.detail-card .card-footer {
+    border-color: var(--line);
+    background: #f8fafc;
+}
+
+.review-heading {
+    margin: 1.5rem 0 1rem;
+    color: var(--ink);
+    font-size: 1.35rem;
+    font-weight: 800;
+}
+
+.review-form {
+    padding: 1.5rem;
+    border: 1px solid #e5e3d8;
+    border-radius: 1rem;
+    background: #fbfaf6;
+}
+
+.review-card .card-title {
+    color: var(--green-dark);
+    font-weight: 800;
+}
+
+.auth-layout {
+    max-width: 570px;
+    margin: 0 auto 1.5rem;
+}
+
+.auth-card-header {
+    position: relative;
+    min-height: 170px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background:
+        linear-gradient(120deg, rgba(38, 59, 56, 0.94), rgba(62, 98, 85, 0.78), rgba(163, 106, 67, 0.48)),
+        url("https://images.unsplash.com/photo-1571863533956-01c88e79957e?auto=format&fit=crop&w=1200&q=80") center 48% / cover;
+}
+
+.auth-card-body .btn-block {
+    width: 100%;
+}
+
+@media (max-width: 767.98px) {
+    main.container {
+        padding-top: 1.5rem;
+        padding-bottom: 2.5rem;
+    }
+
+    .site-navbar .navbar-nav {
+        align-items: stretch;
+    }
+
+    .site-navbar .nav-link {
+        margin: 0.15rem 0;
+        padding-right: 0.35rem;
+        padding-left: 0.35rem;
+        border-bottom: 0;
+    }
+
+    .site-navbar .nav-link:hover,
+    .site-navbar .nav-link:focus {
+        color: #e8c69a;
+        background: transparent;
+    }
+
+    .site-navbar .nav-link.nav-cta {
+        width: fit-content;
+        margin: 0.45rem 0;
+        padding: 0.5rem 0.8rem;
+        border: 1px solid #9f8062;
+    }
+
+    #cluster-map {
+        height: 320px;
+    }
+
+    .campground-carousel .carousel-item img {
+        height: 320px;
+    }
+
+    .campground-listing-image {
+        height: 250px;
+        min-height: 0;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .campground-form-header,
+    .auth-card-header {
+        padding: 1.5rem;
+    }
+
+    .campground-form,
+    .auth-card-body {
+        padding: 1.5rem;
+    }
 }

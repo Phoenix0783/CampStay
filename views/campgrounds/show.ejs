@@ -1,13 +1,18 @@
 <% layout('layouts/boilerplate')%>
 <link rel="stylesheet" href="/stylesheets/stars.css">
 
+<div class="page-heading">
+    <span class="page-eyebrow">Your next escape</span>
+    <h1><%= campground.title %></h1>
+    <p><%= campground.location %></p>
+</div>
 <div class="row">
-    <div class="col-6">
-        <div id="campgroundCarousel" class="carousel slide" data-ride="carousel">
+    <div class="col-lg-7">
+        <div id="campgroundCarousel" class="carousel slide campground-carousel" data-ride="carousel">
             <div class="carousel-inner">
                 <% campground.images.forEach((img, i) => {  %>
                 <div class="carousel-item <%= i === 0 ? 'active' : ''%>">
-                    <img src="<%= img.url%>" class="d-block w-100" alt="">
+                    <img src="<%= img.url%>" class="d-block w-100" alt="<%= campground.title %>">
                 </div>
                 <% }) %>
 
@@ -24,9 +29,9 @@
             <% } %>
         </div>
 
-        <div class="card mb-3">
+        <div class="card detail-card">
             <div class="card-body">
-                <h5 class="card-title"><%= campground.title%></h5>
+                <h2 class="card-title"><%= campground.title%></h2>
                 <p class="card-text"><%= campground.description%></p>
             </div>
             <ul class="list-group list-group-flush">
@@ -42,17 +47,16 @@
                 </form>
             </div>
             <% } %>
-            <div class="card-footer text-muted">
-                2 days ago
-            </div>
+            <div class="card-footer text-muted">A community-shared campground</div>
         </div>
 
     </div>
-    <div class="col-6">
+    <div class="col-lg-5">
         <div id="map"></div>
         <% if(currentUser){ %>
-        <h2>Leave a Review</h2>
-        <form action="/campgrounds/<%=campground._id%>/reviews" method="POST" class="mb-3 validated-form" novalidate>
+        <h2 class="review-heading">Share your experience</h2>
+        <form action="/campgrounds/<%=campground._id%>/reviews" method="POST" class="mb-3 validated-form review-form"
+            novalidate>
             <!-- <div class="mb-3">
                 <label class="form-label" for="rating">Rating</label>
                 <input class="form-range" type="range" min="1" max="5" name="review[rating]" id="rating">
@@ -78,11 +82,18 @@
                     Looks good!
                 </div>
             </div>
-            <button class="btn btn-success">Submit</button>
+            <button class="btn btn-success">Post review</button>
         </form>
+        <% } else { %>
+        <div class="empty-state mb-3">
+            <p>Sign in to share your experience at this campground.</p>
+            <a class="btn btn-primary" href="/login">Log in to review</a>
+        </div>
         <% } %>
+        <h2 class="review-heading">Camper reviews</h2>
+        <% if (campground.reviews.length) { %>
         <% for(let review of campground.reviews) { %>
-        <div class="card mb-3 ">
+        <div class="card review-card">
             <div class="card-body">
                 <h5 class="card-title"> <%= review.author.username%></h5>
                 <p class="starability-result" data-rating="<%=review.rating%>">
@@ -96,6 +107,11 @@
                 </form>
                 <% } %>
             </div>
+        </div>
+        <% } %>
+        <% } else { %>
+        <div class="empty-state">
+            <p>No reviews yet. Be the first to share what you thought.</p>
         </div>
         <% } %>
     </div>

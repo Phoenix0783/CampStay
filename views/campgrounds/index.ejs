@@ -1,27 +1,42 @@
 <% layout('layouts/boilerplate')%>
 
-<div id="cluster-map"></div>
+<div class="page-heading campgrounds-index-heading">
+    <span class="page-eyebrow">The great outdoors, shared</span>
+    <h1>Find your next campout</h1>
+    <p>Explore memorable places to pitch a tent, meet new people, and get outside.</p>
+</div>
 
-<h1>All Campgrounds</h1>
-<% for (let campground of campgrounds){%>
-<div class="card mb-3">
-    <div class="row">
-        <div class="col-md-4">
-            <img class="img-fluid" alt="" src="<%=campground.images[0].url%>">
-        </div>
-        <div class="col-md-8">
-            <div class="card-body">
-                <h5 class="card-title"><%= campground.title %> </h5>
-                <p class="card-text"><%= campground.description %></p>
-                <p class="card-text">
-                    <small class="text-muted"><%= campground.location%></small>
-                </p>
-                <a class="btn btn-primary" href="/campgrounds/<%=campground._id%>">View <%=campground.title%></a>
+<div id="cluster-map" class="map-wide"></div>
+
+<div class="page-heading">
+    <span class="page-eyebrow">Community favorites</span>
+    <h2>All campgrounds</h2>
+</div>
+<% if (campgrounds.length) { %>
+    <% for (let campground of campgrounds){%>
+    <article class="card campground-listing">
+        <div class="row no-gutters">
+            <div class="col-md-4">
+                <img class="campground-listing-image" alt="<%= campground.title %>" src="<%=campground.images[0].url%>">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h3 class="card-title"><%= campground.title %></h3>
+                    <p class="card-text"><%= campground.description %></p>
+                    <p class="card-text campground-location"><%= campground.location%></p>
+                    <a class="btn btn-primary" href="/campgrounds/<%=campground._id%>">Explore campground</a>
+                </div>
             </div>
         </div>
+    </article>
+    <% }%>
+<% } else { %>
+    <div class="empty-state">
+        <h3>No campgrounds yet</h3>
+        <p>Be the first to share a favorite place with the community.</p>
+        <a class="btn btn-primary" href="/campgrounds/new">Add a campground</a>
     </div>
-</div>
-<% }%>
+<% } %>
 
 
 <%- "<script>" %>
