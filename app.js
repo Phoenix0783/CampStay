@@ -172,7 +172,11 @@ app.use((err,req,res,next)=>{
     res.status(statusCode).render("error",{err})
 })
 
-const port = process.env.PORT || 3000
-app.listen(port,()=>{
-    console.log(`Listening to port ${port}`)
-})
+if (require.main === module) {
+  const port = process.env.PORT || 3000;
+  app.listen(port, () => {
+    console.log(`Listening to port ${port}`);
+  });
+}
+
+module.exports = app;
